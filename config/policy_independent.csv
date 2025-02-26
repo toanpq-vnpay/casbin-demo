@@ -1,0 +1,41 @@
+// Role assignments
+g, toanpham, staff
+g, toanleader, leader
+g, toanmanager, manager
+g, rootuser, root
+
+// Staff permissions
+p, staff, /users/me, GET, allow
+p, staff, /products/*, GET, allow
+p, staff, /products/*/stocks/*, PATCH, allow
+
+// Leader permissions (without inheriting staff permissions)
+p, leader, /users/me, GET, allow
+p, leader, /products/*, GET, allow
+p, leader, /products/*/stocks/*, PATCH, allow
+p, leader, /users/*, GET, allow
+p, leader, /users/*/groups, GET, allow
+p, leader, /products, GET, allow
+p, leader, /products, POST, allow
+p, leader, /products/*, PATCH, allow
+p, leader, /products/*, DELETE, allow
+
+// Manager permissions (without inheriting leader permissions)
+p, manager, /users/me, GET, allow
+p, manager, /products/*, GET, allow
+p, manager, /products/*/stocks/*, PATCH, allow
+p, manager, /users/*, GET, allow
+p, manager, /users/*/groups, GET, allow
+p, manager, /products, GET, allow
+p, manager, /products, POST, allow
+p, manager, /products/*, PATCH, allow
+p, manager, /products/*, DELETE, allow
+p, manager, /users, POST, allow
+p, manager, /reports/products, GET, allow
+p, manager, /groups/*/users/*, POST, allow
+p, manager, /groups/*/users/*, DELETE, allow
+p, manager, /groups/*/users, GET, allow
+p, manager, /groups/*/users, DELETE, allow
+
+// Root permissions (unchanged)
+p, root, *, *, allow

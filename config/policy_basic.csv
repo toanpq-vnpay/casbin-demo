@@ -1,0 +1,37 @@
+// Role assignments
+g, toanpham, staff
+g, toanleader, leader
+g, toanmanager, manager
+g, rootuser, root
+
+// Define role inheritance from capability groups
+g2, staff, basic_access
+g2, leader, basic_access
+g2, leader, product_management
+g2, manager, basic_access
+g2, manager, product_management
+g2, manager, user_management
+
+// Basic access capabilities (common for all roles)
+p, basic_access, /users/me, GET, allow
+p, basic_access, /products/*, GET, allow
+p, basic_access, /products/*/stocks/*, PATCH, allow
+
+// Product management capabilities
+p, product_management, /users/*, GET, allow
+p, product_management, /users/*/groups, GET, allow
+p, product_management, /products, GET, allow
+p, product_management, /products, POST, allow
+p, product_management, /products/*, PATCH, allow
+p, product_management, /products/*, DELETE, allow
+
+// User management capabilities
+p, user_management, /users, POST, allow
+p, user_management, /reports/products, GET, allow
+p, user_management, /groups/*/users/*, POST, allow
+p, user_management, /groups/*/users/*, DELETE, allow
+p, user_management, /groups/*/users, GET, allow
+p, user_management, /groups/*/users, DELETE, allow
+
+// Root permissions (unchanged)
+p, root, *, *, allow

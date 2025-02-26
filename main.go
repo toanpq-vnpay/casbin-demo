@@ -14,12 +14,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Password string `json:"password,omitempty"`
-}
-
 func main() {
 	err := database.InitializeDatabase()
 	if err != nil {
